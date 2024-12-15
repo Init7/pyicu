@@ -24,6 +24,7 @@ case "$ID" in
         ;;
 
     centos)
+        yum install -y libicu
         ;;
 
     *)
