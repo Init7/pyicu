@@ -87,7 +87,7 @@ jobs:
           CIBW_ENVIRONMENT: >-
             PKG_CONFIG_PATH="/project/.ci/out/lib/pkgconfig"
             PYICU_INCLUDES="/project/.ci/out/include"
-            PYICU_LIBRARIES="/project/.ci/out/lib/libicui18n:/project/.ci/out/lib/libicuuc:/project/.ci/out/lib/libicudata"
+            PYICU_LIBRARIES="/project/.ci/out/lib/libicui18n.a:/project/.ci/out/lib/libicuuc.a:/project/.ci/out/lib/libicudata.a"
 
       - uses: actions/upload-artifact@v4
         with:
