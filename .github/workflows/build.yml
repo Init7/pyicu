@@ -29,6 +29,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install build dependencies
+        run: |
+          apt-get update
+          apt-get install -y pkg-config
+
       - name: Download libicu
         working-directory: ${{ github.workspace }}/.ci/build
         run: |
