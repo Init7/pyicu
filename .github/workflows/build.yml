@@ -80,7 +80,7 @@ jobs:
           package-dir: pyicu
         env:
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_28
-          CIBW_BEFORE_ALL_LINUX: ./scripts/ci/before-all-linux.sh
+          CIBW_BEFORE_ALL_LINUX: ./scripts/before-all-linux.sh
           CIBW_BUILD: ${{ matrix.cpy }}-${{ matrix.platform }}_${{ matrix.arch }}
           # TODO: fix
           CIBW_ARCHS_LINUX: auto
