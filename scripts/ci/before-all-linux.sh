@@ -3,6 +3,9 @@
 echo "package config: $(which pkg-config)"
 env
 
+echo "this is pwd"
+pwd
+
 echo "this is pkg_config_path"
 ls -la $PKG_CONFIG_PATH
 
