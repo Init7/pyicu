@@ -86,6 +86,7 @@ jobs:
           CIBW_ARCHS_LINUX: auto
           CIBW_ENVIRONMENT: >-
             PKG_CONFIG_PATH="/project/.ci/out/lib/pkgconfig"
+            PYICU_INCLUDES="/project/.ci/out/include"
 
       - uses: actions/upload-artifact@v4
         with:
