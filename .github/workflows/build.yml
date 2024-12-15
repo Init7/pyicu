@@ -4,6 +4,9 @@ on: [push, pull_request]
 
 env:
   PYICU_VERSION: "2.14"
+  _ICU_URL: https://github.com/unicode-org/icu/releases/download/release-76-1/icu4c-76_1-src.tgz
+  _ICU_SRC: /var/build/icu
+  _OUT_DIR: /var/build/out
 
 jobs:
   linux:
@@ -25,7 +28,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch source
+      - name: Install libicu
+        run: |
+          wget -q -O ${_ICU_SRC}.tgz ${_ICU_URL}
+          gunzip -d < ${_ICU_SRC}.tgz | tar xvf -
+          cd icu/source
+          chmod +x runConfigureICU configure install-sh
+          ./runConfigureICU Linux --prefix=${_OUT_DIR} --enable-static
+          gmake
+          gmake install
+
+      - name: Fetch pyicu source
         run: git clone --branch=v${PYICU_VERSION} --depth=1 https://gitlab.pyicu.org/main/pyicu.git
 
       - name: Build wheels
@@ -36,6 +49,8 @@ jobs:
           CIBW_BUILD: ${{ matrix.cpy }}-${{ matrix.platform }}_${{ matrix.arch }}
           # TODO: fix
           CIBW_ARCHS_LINUX: auto
+          CIBW_ENVIRONMENT: >-
+            PKG_CONFIG_PATH="${_OUT_DIR}/lib/pkgconfig"
 
       - uses: actions/upload-artifact@v4
         with:
