@@ -5,6 +5,11 @@ env
 
 echo "this is pwd"
 pwd
+ls -la
+ls -la .ci
+ls -la .ci/out
+ls -la .ci/out/lib
+ls -la .ci/out/lib/pkgconfig
 
 echo "this is pkg_config_path"
 ls -la $PKG_CONFIG_PATH
