@@ -1,18 +1,14 @@
 #!/bin/bash
 
+set -euo pipefail
+
+_HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+echo "dir: ${_HERE}"
+echo "pwd: $(pwd)"
+
 echo "package config: $(which pkg-config)"
 env
-
-echo "this is pwd"
-pwd
-ls -la
-ls -la .ci
-ls -la .ci/out
-ls -la .ci/out/lib
-ls -la .ci/out/lib/pkgconfig
-
-echo "this is pkg_config_path"
-ls -la $PKG_CONFIG_PATH
 
 source /etc/os-release
 
@@ -41,4 +37,5 @@ case "$ID" in
         ;;
 esac
 
-./install-libicu.sh
+
+${_HERE}/install-libicu.sh
