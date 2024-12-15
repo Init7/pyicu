@@ -42,20 +42,29 @@ jobs:
           # See https://github.com/pypa/cibuildwheel/issues/1250
           image: tonistiigi/binfmt:qemu-v7.0.0
 
+      - name: Cache libicu
+        id: cache-libicu
+        uses: actions/cache@v4
+        with:
+          path: ${_OUT_DIR}
+          key: ${{ runner.os }}-temp-1
+
       - name: Download libicu
+        if: steps.cache-libicu.outputs.cache-hit != 'true'
         working-directory: ${{ github.workspace }}/.ci/build
         run: |
           wget -q -O icu.tgz ${_ICU_URL}
           gunzip -d < icu.tgz | tar xvf -
 
-      # - name: Build libicu
-      #   working-directory: ${{ github.workspace }}/.ci/build/icu/source
-      #   run: |
-      #     chmod +x runConfigureICU configure install-sh
-      #     ./runConfigureICU Linux --prefix=${_OUT_DIR} --enable-static
-      #     gmake
-      #     gmake install
-      #     ls -la ${_OUT_DIR}
+      - name: Build libicu
+        if: steps.cache-libicu.outputs.cache-hit != 'true'
+        working-directory: ${{ github.workspace }}/.ci/build/icu/source
+        run: |
+          chmod +x runConfigureICU configure install-sh
+          ./runConfigureICU Linux --prefix=${_OUT_DIR} --enable-static
+          gmake
+          gmake install
+          ls -la ${_OUT_DIR}
 
       - name: Fetch pyicu source
         run: git clone --branch=v${PYICU_VERSION} --depth=1 https://gitlab.pyicu.org/main/pyicu.git
