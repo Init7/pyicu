@@ -31,7 +31,7 @@ case "$ID" in
         ;;
 
     almalinux)
-        dnf -y install libicu
+        dnf -y install libicu libicu-devel
         ;;
 
     *)
