@@ -6,7 +6,44 @@ env:
   PYICU_VERSION: "2.14"
 
 jobs:
+  linux:
+    name: Build wheels on Linux (${{ matrix.platform }}-${{ matrix.arch }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch:
+          - "x86_64"
+          # - "aarch64"
+          # - "i686"
+          # - "ppc64le"
+        cpy:
+          - "cp313"
+        platform:
+          - "manylinux"
+        #   - musllinux
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch source
+        run: git clone --branch=v${PYICU_VERSION} --depth=1 https://gitlab.pyicu.org/main/pyicu.git
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.22.0
+        with:
+          package-dir: pyicu
+        env:
+          CIBW_BUILD: ${{ matrix.cpy }}-${{ matrix.platform }}_${{ matrix.arch }}
+          # TODO: fix
+          CIBW_ARCHS_LINUX: auto
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-${{ matrix.cpy }}-${{ matrix.platform }}_${{ matrix.arch }}
+          path: ./wheelhouse/*.whl
+
   macos-intel:
+    if: false
     name: Build wheels on macOS (x86_64)
     # macos-13 is an intel runner, macos-14 is apple silicon
     runs-on: macos-13
