@@ -85,7 +85,7 @@ jobs:
           # TODO: fix
           CIBW_ARCHS_LINUX: auto
           CIBW_ENVIRONMENT: >-
-            PKG_CONFIG_PATH="${{ github.workspace }}/.ci/out/lib/pkgconfig"
+            PKG_CONFIG_PATH=".ci/out/lib/pkgconfig"
 
       - uses: actions/upload-artifact@v4
         with:
