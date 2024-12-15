@@ -1,0 +1,42 @@
+name: Build
+
+on: [push, pull_request]
+
+env:
+  PYICU_VERSION: "2.14"
+  PYICU_TAG: "v${PYICU_VERSION}"
+
+jobs:
+  macos-intel:
+    name: Build wheels on macOS (x86_64)
+    # macos-13 is an intel runner, macos-14 is apple silicon
+    runs-on: macos-13
+    strategy:
+      matrix:
+        arch:
+          - "x86_64"
+        cpy:
+          - "cp310"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch source
+        run: git clone --branch=${PYICU_TAG} --depth=1 https://gitlab.pyicu.org/main/pyicu.git
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.22.0
+        with:
+          package-dir: pyicu
+        env:
+          CIBW_BUILD: ${{matrix.cpy}}-macosx_${{matrix.arch}}
+          CIBW_ARCHS_MACOS: ${{matrix.arch}}
+        # with:
+        #   package-dir: .
+        #   output-dir: wheelhouse
+        #   config-file: "{package}/pyproject.toml"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos-13-${{matrix.cpy}}-macosx_${{matrix.arch}}
+          path: ./wheelhouse/*.whl
