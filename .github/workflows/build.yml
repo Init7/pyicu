@@ -24,19 +24,19 @@ jobs:
         #   - musllinux
 
     env:
-      _OUT_DIR: ${{ github.workspace }}/.out
+      _OUT_DIR: ${{ github.workspace }}/.ci/out
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Download libicu
-        working-directory: ${{ github.workspace }}/.build
+        working-directory: ${{ github.workspace }}/.ci/build
         run: |
           wget -q -O icu.tgz ${_ICU_URL}
           gunzip -d < icu.tgz | tar xvf -
 
       - name: Build libicu
-        working-directory: ${{ github.workspace }}/.build/icu/source
+        working-directory: ${{ github.workspace }}/.ci/build/icu/source
         run: |
           chmod +x runConfigureICU configure install-sh
           ./runConfigureICU Linux --prefix=${_OUT_DIR} --enable-static
