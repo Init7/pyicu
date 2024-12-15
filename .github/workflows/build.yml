@@ -31,6 +31,7 @@ jobs:
       - name: Install libicu
         run: |
           wget -q -O ${_ICU_SRC}.tgz ${_ICU_URL}
+          ls -la /var/build
           gunzip -d < ${_ICU_SRC}.tgz | tar xvf -
           cd icu/source
           chmod +x runConfigureICU configure install-sh
