@@ -61,7 +61,15 @@ jobs:
           ./runConfigureICU Linux --prefix=${{ github.workspace }}/.ci/out --enable-static
           gmake
           gmake install
+
+      - name: Check libicu
+        run: |
+          echo "out:"
           ls -la ${{ github.workspace }}/.ci/out
+          echo "out/lib:"
+          ls -la ${{ github.workspace }}/.ci/out/lib
+          echo "out/lib/pkgconfig:"
+          ls -la ${{ github.workspace }}/.ci/out/lib/pkgconfig
 
       - name: Fetch pyicu source
         run: git clone --branch=v${PYICU_VERSION} --depth=1 https://gitlab.pyicu.org/main/pyicu.git
