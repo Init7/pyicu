@@ -5,8 +5,6 @@ on: [push, pull_request]
 env:
   PYICU_VERSION: "2.14"
   _ICU_URL: https://github.com/unicode-org/icu/releases/download/release-76-1/icu4c-76_1-src.tgz
-  _ICU_SRC: /var/build/icu
-  _OUT_DIR: /var/build/out
 
 jobs:
   linux:
@@ -25,16 +23,21 @@ jobs:
           - "manylinux"
         #   - musllinux
 
+    env:
+      _OUT_DIR: ${{ github.workspace }}/.out
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install libicu
+      - name: Download libicu
+        working-directory: ${{ github.workspace }}/.build
         run: |
-          mkdir -p /var/build
-          wget -q -O ${_ICU_SRC}.tgz ${_ICU_URL}
-          ls -la /var/build
-          gunzip -d < ${_ICU_SRC}.tgz | tar xvf -
-          cd icu/source
+          wget -q -O icu.tgz ${_ICU_URL}
+          gunzip -d < icu.tgz | tar xvf -
+
+      - name: Build libicu
+        working-directory: ${{ github.workspace }}/.build/icu/source
+        run: |
           chmod +x runConfigureICU configure install-sh
           ./runConfigureICU Linux --prefix=${_OUT_DIR} --enable-static
           gmake
