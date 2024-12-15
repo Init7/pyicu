@@ -16,6 +16,9 @@ ls -la $PKG_CONFIG_PATH
 
 source /etc/os-release
 
+echo "release:"
+cat /etc/os-release
+
 case "$ID" in
     debian)
         apt-get update
