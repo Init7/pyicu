@@ -23,9 +23,6 @@ jobs:
           - "manylinux"
         #   - musllinux
 
-    env:
-      _OUT_DIR: ${{ github.workspace }}/.ci/out
-
     steps:
       - uses: actions/checkout@v4
 
@@ -46,7 +43,7 @@ jobs:
         id: cache-libicu
         uses: actions/cache@v4
         with:
-          path: ${_OUT_DIR}
+          path: ${{ github.workspace }}/.ci/out
           key: ${{ runner.os }}-temp-1
 
       - name: Download libicu
@@ -61,10 +58,10 @@ jobs:
         working-directory: ${{ github.workspace }}/.ci/build/icu/source
         run: |
           chmod +x runConfigureICU configure install-sh
-          ./runConfigureICU Linux --prefix=${_OUT_DIR} --enable-static
+          ./runConfigureICU Linux --prefix=${{ github.workspace }}/.ci/out --enable-static
           gmake
           gmake install
-          ls -la ${_OUT_DIR}
+          ls -la ${{ github.workspace }}/.ci/out
 
       - name: Fetch pyicu source
         run: git clone --branch=v${PYICU_VERSION} --depth=1 https://gitlab.pyicu.org/main/pyicu.git
