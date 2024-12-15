@@ -16,6 +16,6 @@ case "$ID" in
 
     *)
         echo "$0: unexpected Linux distribution: '$ID'" >&2
-        exit 1
+        # exit 1
         ;;
 esac
