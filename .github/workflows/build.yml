@@ -48,14 +48,14 @@ jobs:
           wget -q -O icu.tgz ${_ICU_URL}
           gunzip -d < icu.tgz | tar xvf -
 
-      - name: Build libicu
-        working-directory: ${{ github.workspace }}/.ci/build/icu/source
-        run: |
-          chmod +x runConfigureICU configure install-sh
-          ./runConfigureICU Linux --prefix=${_OUT_DIR} --enable-static
-          gmake
-          gmake install
-          ls -la ${_OUT_DIR}
+      # - name: Build libicu
+      #   working-directory: ${{ github.workspace }}/.ci/build/icu/source
+      #   run: |
+      #     chmod +x runConfigureICU configure install-sh
+      #     ./runConfigureICU Linux --prefix=${_OUT_DIR} --enable-static
+      #     gmake
+      #     gmake install
+      #     ls -la ${_OUT_DIR}
 
       - name: Fetch pyicu source
         run: git clone --branch=v${PYICU_VERSION} --depth=1 https://gitlab.pyicu.org/main/pyicu.git
