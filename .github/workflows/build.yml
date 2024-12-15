@@ -17,6 +17,9 @@ jobs:
         cpy:
           - "cp310"
 
+    env:
+      LIBICU_VERSION: "76"
+
     steps:
       - uses: actions/checkout@v4
 
@@ -26,8 +29,7 @@ jobs:
       - name: Install build dependencies
         run: |
           brew update
-          brew install pkgconf icu4c
-          brew link icu4c --force
+          brew install pkgconf icu4c@${LIBICU_VERSION}
 
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.22.0
