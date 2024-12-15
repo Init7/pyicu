@@ -2,6 +2,7 @@
 
 echo "package config: $(which pkg-config)"
 env
+ls -la ${PKG_CONFIG_PATH}
 ls -la ${_OUT_DIR}
 
 source /etc/os-release
