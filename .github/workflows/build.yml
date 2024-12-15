@@ -38,6 +38,8 @@ jobs:
         env:
           CIBW_BUILD: ${{matrix.cpy}}-macosx_${{matrix.arch}}
           CIBW_ARCHS_MACOS: ${{matrix.arch}}
+          CIBW_ENVIRONMENT: >-
+            PKG_CONFIG_PATH="/usr/local/opt/icu4c@${LIBICU_VERSION}/lib/pkgconfig"
         # with:
         #   package-dir: .
         #   output-dir: wheelhouse
