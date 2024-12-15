@@ -23,6 +23,9 @@ jobs:
       - name: Fetch source
         run: git clone --branch=v${PYICU_VERSION} --depth=1 https://gitlab.pyicu.org/main/pyicu.git
 
+      - name: Install build dependencies
+        run: brew update && brew install pkgconf
+
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.22.0
         with:
