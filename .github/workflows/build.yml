@@ -72,11 +72,9 @@ jobs:
           ls -la ${{ github.workspace }}/.ci/out/lib/pkgconfig
 
       - name: Fetch pyicu source
-        if: false
         run: git clone --branch=v${PYICU_VERSION} --depth=1 https://gitlab.pyicu.org/main/pyicu.git
 
       - name: Build wheels
-        if: false
         uses: pypa/cibuildwheel@v2.22.0
         with:
           package-dir: pyicu
@@ -90,7 +88,6 @@ jobs:
             PKG_CONFIG_PATH="${{ github.workspace }}/.ci/out/lib/pkgconfig"
 
       - uses: actions/upload-artifact@v4
-        if: false
         with:
           name: linux-${{ matrix.cpy }}-${{ matrix.platform }}_${{ matrix.arch }}
           path: ./wheelhouse/*.whl
