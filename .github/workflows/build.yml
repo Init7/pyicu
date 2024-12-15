@@ -55,6 +55,7 @@ jobs:
           ./runConfigureICU Linux --prefix=${_OUT_DIR} --enable-static
           gmake
           gmake install
+          ls -la ${_OUT_DIR}
 
       - name: Fetch pyicu source
         run: git clone --branch=v${PYICU_VERSION} --depth=1 https://gitlab.pyicu.org/main/pyicu.git
