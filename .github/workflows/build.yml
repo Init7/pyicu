@@ -4,7 +4,6 @@ on: [push, pull_request]
 
 env:
   PYICU_VERSION: "2.14"
-  PYICU_TAG: "v${PYICU_VERSION}"
 
 jobs:
   macos-intel:
@@ -22,7 +21,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Fetch source
-        run: git clone --branch=${PYICU_TAG} --depth=1 https://gitlab.pyicu.org/main/pyicu.git
+        run: git clone --branch=v${PYICU_VERSION} --depth=1 https://gitlab.pyicu.org/main/pyicu.git
 
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.22.0
