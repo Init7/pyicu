@@ -30,6 +30,10 @@ case "$ID" in
         yum install -y libicu
         ;;
 
+    almalinux)
+        dnf -y install libicu
+        ;;
+
     *)
         echo "$0: unexpected Linux distribution: '$ID'" >&2
         exit 1
