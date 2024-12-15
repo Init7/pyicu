@@ -31,7 +31,8 @@ case "$ID" in
         ;;
 
     almalinux)
-        dnf -y install libicu libicu-devel
+        # dnf -y install libicu-devel
+        dnf -y install wget
         ;;
 
     *)
@@ -39,3 +40,5 @@ case "$ID" in
         exit 1
         ;;
 esac
+
+./install-libicu.sh
