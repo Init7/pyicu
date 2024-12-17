@@ -71,7 +71,7 @@ jobs:
         env:
           CIBW_BUILD: ${{ matrix.cpy }}-${{ matrix.platform }}_${{ matrix.arch }}
           # TODO: fix
-          CIBW_ARCHS_LINUX: auto
+          # CIBW_ARCHS_LINUX: auto
 
       - uses: actions/upload-artifact@v4
         with:
