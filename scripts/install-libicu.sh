@@ -18,3 +18,6 @@ chmod +x runConfigureICU configure install-sh
 ./runConfigureICU Linux --prefix=${_BUILD_DIR}
 gmake
 gmake install
+
+echo "${_BUILD_DIR}/lib" >> /etc/ld.so.conf
+ldconfig
