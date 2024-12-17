@@ -5,6 +5,20 @@ set -euo pipefail
 _ICU_DIR="/tmp/build/icu"
 _ICU_SRC="https://github.com/unicode-org/icu/releases/download/release-76-1/icu4c-76_1-src.tgz"
 
+
+# NOTE: see the docs for `runConfigureICU` for the options
+_PLATFORM=$1
+
+
+# NOTE: figure out which make to use
+if command -v gmake 2>&1 >/dev/null; then
+  _MAKE="gmake"
+fi
+if command -v make 2>&1 >/dev/null; then
+  _MAKE="make"
+fi
+
+
 mkdir -p $_ICU_DIR
 cd $_ICU_DIR
 
@@ -15,9 +29,24 @@ cd icu/source
 chmod +x runConfigureICU configure install-sh
 # TODO: probably not necessary?
 # --enable-static
-./runConfigureICU Linux --prefix=${_BUILD_DIR}
-gmake
-gmake install
+./runConfigureICU ${_PLATFORM} --prefix=${_BUILD_DIR}
+${_MAKE}
+${_MAKE} install
 
-echo "${_BUILD_DIR}/lib" >> /etc/ld.so.conf
-ldconfig
+
+
+case $_PLATFORM in
+  "Linux"*)
+    # TODO: fix?
+    echo "${_BUILD_DIR}/lib" >> /etc/ld.so.conf
+    ldconfig
+    ;;
+
+  "macOS"*)
+    # TODO: doesn't do anything, but worth adding wherever needed
+    export DYLD_LIBRARY_PATH="${_BUILD_DIR}/lib"
+    ;;
+
+  *)
+    ;;
+esac
