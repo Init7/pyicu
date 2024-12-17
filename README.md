@@ -19,3 +19,5 @@ pip install pyicu-wheels
 ## License
 
 `pyicu-wheels` is distributed under the terms of the [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html) license.
+
+See the [licenses](./licenses/README.md) directory for third-party licenses.
