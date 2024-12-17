@@ -36,14 +36,6 @@ jobs:
       - name: Install Hatch
         run: pip install --upgrade hatch
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: all
-          # Note: 6.2.0 is buggy: make sure to avoid it.
-          # See https://github.com/pypa/cibuildwheel/issues/1250
-          image: tonistiigi/binfmt:qemu-v7.0.0
-
       - name: Cache pyicu
         id: cache-pyicu
         uses: actions/cache@v4
@@ -54,6 +46,14 @@ jobs:
       - name: Fetch pyicu source
         if: steps.cache-pyicu.outputs.cache-hit != 'true'
         run: git clone --branch=v${PYICU_VERSION} --depth=1 ${PYICU_URL}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: all
+          # Note: 6.2.0 is buggy: make sure to avoid it.
+          # See https://github.com/pypa/cibuildwheel/issues/1250
+          image: tonistiigi/binfmt:qemu-v7.0.0
 
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.22.0
