@@ -58,7 +58,7 @@ check = "mypy --install-types --non-interactive {args:src/pyicu_binary tests}"
 
 
 [tool.cibuildwheel]
-build = "cp3{10,11,12}-*"
+build = "*"
 skip = ""
 archs = ["auto"]
 
