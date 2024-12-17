@@ -32,6 +32,24 @@ Source = "https://github.com/tunnelworks/pyicu-binary"
 [tool.hatch.version]
 path = "src/pyicu_binary/__about__.py"
 
+
+[tool.hatch.envs.default]
+dependencies = []
+
+[tool.hatch.envs.default.env-vars]
+_BUILD_DIR = "{root:real}/.build"
+PYICU_URL = "https://gitlab.pyicu.org/main/pyicu.git"
+PYICU_VERSION = "2.14"
+
+
+[tool.hatch.envs.compile]
+extra-dependencies = ["cibuildwheel"]
+
+[tool.hatch.envs.compile.scripts]
+setup = "git clone --branch=v{env:PYICU_VERSION} --depth=1 {env:PYICU_URL}"
+build = "cibuildwheel {args:--platform linux {root:real}}"
+
+
 [tool.hatch.envs.types]
 extra-dependencies = ["mypy>=1.0.0"]
 [tool.hatch.envs.types.scripts]
