@@ -24,6 +24,7 @@ classifiers = [
 ]
 dependencies = []
 
+
 [project.urls]
 Documentation = "https://github.com/tunnelworks/pyicu-binary#readme"
 Issues = "https://github.com/tunnelworks/pyicu-binary/issues"
@@ -46,13 +47,16 @@ ICU_MAX_MAJOR_VERSION = "76"
 [tool.hatch.envs.compile]
 extra-dependencies = ["cibuildwheel"]
 
+
 [tool.hatch.envs.compile.scripts]
-setup = "git clone --branch=v{env:PYICU_VERSION} --depth=1 {env:PYICU_URL}"
+pyicu = "git clone --branch=v{env:PYICU_VERSION} --depth=1 {env:PYICU_URL}"
+libicu = "{root:real}/scripts/install-libicu.sh {args:macOS/gcc}"
 build = "cibuildwheel {args:--platform linux {root:real}}"
 
 
 [tool.hatch.envs.types]
 extra-dependencies = ["mypy>=1.0.0"]
+
 [tool.hatch.envs.types.scripts]
 check = "mypy --install-types --non-interactive {args:src/pyicu_binary tests}"
 
