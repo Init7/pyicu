@@ -36,40 +36,16 @@ jobs:
           # See https://github.com/pypa/cibuildwheel/issues/1250
           image: tonistiigi/binfmt:qemu-v7.0.0
 
-      - name: Cache libicu
-        id: cache-libicu
+      - name: Cache pyicu
+        id: cache-pyicu
         uses: actions/cache@v4
         with:
-          path: ${{ github.workspace }}/.ci/out
-          key: ${{ runner.os }}-temp-1
-
-      - name: Download libicu
-        if: steps.cache-libicu.outputs.cache-hit != 'true'
-        working-directory: ${{ github.workspace }}/.ci/build
-        run: |
-          wget -q -O icu.tgz ${_ICU_URL}
-          gunzip -d < icu.tgz | tar xvf -
-
-      - name: Build libicu
-        if: steps.cache-libicu.outputs.cache-hit != 'true'
-        working-directory: ${{ github.workspace }}/.ci/build/icu/source
-        run: |
-          chmod +x runConfigureICU configure install-sh
-          ./runConfigureICU Linux --prefix=${{ github.workspace }}/.ci/out --enable-static
-          gmake
-          gmake install
-
-      - name: Check libicu
-        run: |
-          echo "out:"
-          ls -la ${{ github.workspace }}/.ci/out
-          echo "out/lib:"
-          ls -la ${{ github.workspace }}/.ci/out/lib
-          echo "out/lib/pkgconfig:"
-          ls -la ${{ github.workspace }}/.ci/out/lib/pkgconfig
+          path: ${{ github.workspace }}/pyicu
+          key: ${{ runner.os }}-pyicu-${PYICU_VERSION}
 
       - name: Fetch pyicu source
-        run: git clone --branch=v${PYICU_VERSION} --depth=1 https://gitlab.pyicu.org/main/pyicu.git
+        if: steps.cache-pyicu.outputs.cache-hit != 'true'
+        run: git clone --branch=v${PYICU_VERSION} --depth=1 ${PYICU_URL}
 
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.22.0
