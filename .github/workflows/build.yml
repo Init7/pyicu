@@ -55,10 +55,6 @@ jobs:
           CIBW_BUILD: ${{ matrix.cpy }}-${{ matrix.platform }}_${{ matrix.arch }}
           # TODO: fix
           CIBW_ARCHS_LINUX: auto
-          # CIBW_ENVIRONMENT: >-
-          #   PKG_CONFIG_PATH="/project/.ci/out/lib/pkgconfig"
-          #   PYICU_INCLUDES="/project/.ci/out/include"
-          #   PYICU_LIBRARIES="/project/.ci/out/lib/libicui18n.a:/project/.ci/out/lib/libicuuc.a:/project/.ci/out/lib/libicudata.a"
 
       - uses: actions/upload-artifact@v4
         with:
