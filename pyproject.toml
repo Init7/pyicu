@@ -49,3 +49,16 @@ tests = ["tests", "*/pyicu-binary/tests"]
 
 [tool.coverage.report]
 exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
+
+
+[tool.hatch.build.targets.sdist]
+exclude = [".github", "tests"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["pyicu/py/icu"]
+
+[tool.hatch.build.targets.wheel.hooks.buildext]
+dependencies = ["hatch-buildext >=0.0.3"]
+
+[tool.hatch.build.targets.wheel.hooks.buildext.extensions]
+"icu._icu_" = "hook"
