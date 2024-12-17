@@ -1,9 +1,9 @@
-# pyicu-binary
+# pyicu-wheels
 
-[![PyPI - Version](https://img.shields.io/pypi/v/pyicu-binary.svg)](https://pypi.org/project/pyicu-binary)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyicu-binary.svg)](https://pypi.org/project/pyicu-binary)
+[![PyPI - Version](https://img.shields.io/pypi/v/pyicu-wheels.svg)](https://pypi.org/project/pyicu-wheels)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyicu-wheels.svg)](https://pypi.org/project/pyicu-wheels)
 
------
+---
 
 ## Table of Contents
 
@@ -13,9 +13,9 @@
 ## Installation
 
 ```console
-pip install pyicu-binary
+pip install pyicu-wheels
 ```
 
 ## License
 
-`pyicu-binary` is distributed under the terms of the [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html) license.
+`pyicu-wheels` is distributed under the terms of the [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html) license.
