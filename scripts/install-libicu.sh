@@ -13,6 +13,8 @@ gunzip -d < icu.tgz | tar xf -
 cd icu/source
 
 chmod +x runConfigureICU configure install-sh
+# TODO: probably not necessary?
+# --enable-static
 ./runConfigureICU Linux
 gmake
 gmake install
