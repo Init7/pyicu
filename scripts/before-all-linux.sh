@@ -8,9 +8,8 @@ _HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # NOTE: export build dir, used downstream
 export _BUILD_DIR="$(pwd)/.build"
 
-echo "package config: $(which pkg-config)"
-env
 
+# NOTE: add `ID` to environment
 source /etc/os-release
 
 echo "release:"
