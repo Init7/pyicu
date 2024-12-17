@@ -41,4 +41,4 @@ case "$ID" in
 esac
 
 
-${_HERE}/install-libicu.sh
+${_HERE}/install-libicu.sh Linux
