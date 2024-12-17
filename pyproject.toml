@@ -44,12 +44,19 @@ PYICU_VERSION = "2.14"
 ICU_MAX_MAJOR_VERSION = "76"
 
 
+[tool.hatch.envs.pyicu]
+skip-install = true
+
+[tool.hatch.envs.pyicu.scripts]
+clone = "git clone --branch=v{env:PYICU_VERSION} --depth=1 {env:PYICU_URL}"
+src = "cp {root:real}/pyicu/py/icu/* {root:real}/src/icu/"
+tests = "cp {root:real}/pyicu/test/* {root:real}/tests/"
+
+
 [tool.hatch.envs.compile]
 extra-dependencies = ["cibuildwheel"]
 
-
 [tool.hatch.envs.compile.scripts]
-pyicu = "git clone --branch=v{env:PYICU_VERSION} --depth=1 {env:PYICU_URL}"
 libicu = "{root:real}/scripts/install-libicu.sh {args:macOS/gcc}"
 build = "cibuildwheel {args:--platform linux {root:real}}"
 
