@@ -55,18 +55,23 @@ extra-dependencies = ["mypy>=1.0.0"]
 [tool.hatch.envs.types.scripts]
 check = "mypy --install-types --non-interactive {args:src/pyicu_binary tests}"
 
-[tool.coverage.run]
-source_pkgs = ["pyicu_binary", "tests"]
-branch = true
-parallel = true
-omit = ["src/pyicu_binary/__about__.py"]
+
+[tool.cibuildwheel]
+build = "cp3{10,11,12}-*"
+skip = ""
+archs = ["auto"]
+
 
 [tool.coverage.paths]
 pyicu_binary = ["src/pyicu_binary", "*/pyicu-binary/src/pyicu_binary"]
 tests = ["tests", "*/pyicu-binary/tests"]
 
-[tool.coverage.report]
-exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
+[tool.cibuildwheel.linux]
+environment = {}
+environment-pass = ["PYICU_URL", "PYICU_VERSION"]
+before-build = "scripts/before-all-linux.sh"
+manylinux-x86_64-image = "manylinux_2_28"
+# repair-wheel-command = "auditwheel repair -w {dest_dir} {wheel}"
 
 
 [tool.hatch.build.targets.sdist]
