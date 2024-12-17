@@ -45,6 +45,7 @@ def get_libraries(root: str) -> t.Sequence[str]:
         "icui18n",
         "icuuc",
     ]
+    # TODO: fix for other platforms?
     return [
         "libicudata",
         "libicui18n",
