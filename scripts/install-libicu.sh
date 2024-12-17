@@ -19,10 +19,10 @@ if command -v make 2>&1 >/dev/null; then
 fi
 
 
-mkdir -p $_TMP_DIR
-cd $_TMP_DIR
+mkdir -p ${_TMP_DIR}
+cd ${_TMP_DIR}
 
-wget -q -O icu.tgz $_ICU_SRC
+wget -q -O icu.tgz ${_ICU_SRC}
 gunzip -d < icu.tgz | tar xf -
 cd icu/source
 
@@ -35,7 +35,7 @@ ${_MAKE} install
 
 
 
-case $_PLATFORM in
+case "${_PLATFORM}" in
   "Linux"*)
     # TODO: fix?
     echo "${_BUILD_DIR}/lib" >> /etc/ld.so.conf
