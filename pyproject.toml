@@ -26,9 +26,10 @@ dependencies = []
 
 
 [project.urls]
-Documentation = "https://github.com/tunnelworks/pyicu-binary#readme"
-Issues = "https://github.com/tunnelworks/pyicu-binary/issues"
-Source = "https://github.com/tunnelworks/pyicu-binary"
+Documentation = "https://github.com/xoudini/pyicu#readme"
+Issues = "https://github.com/xoudini/pyicu/issues"
+Source = "https://github.com/xoudini/pyicu"
+
 
 [tool.hatch.version]
 path = "src/icu/__about__.py"
