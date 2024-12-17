@@ -23,11 +23,10 @@ case "$ID" in
         ;;
 
     centos)
-        yum install -y libicu
+        yum install -y wget
         ;;
 
     almalinux)
-        # dnf -y install libicu-devel
         dnf -y install wget
         ;;
 
