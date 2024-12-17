@@ -61,6 +61,8 @@ check = "mypy --install-types --non-interactive {args:src/pyicu_binary tests}"
 build = "*"
 skip = ""
 archs = ["auto"]
+before-test = "pip install pytest six"
+test-command = "python -m pytest"
 
 
 [tool.cibuildwheel.linux]
