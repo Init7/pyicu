@@ -15,6 +15,6 @@ cd icu/source
 chmod +x runConfigureICU configure install-sh
 # TODO: probably not necessary?
 # --enable-static
-./runConfigureICU Linux
+./runConfigureICU Linux --prefix=${_BUILD_DIR}
 gmake
 gmake install
