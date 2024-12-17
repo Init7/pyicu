@@ -1,3 +1,4 @@
+import os
 import pathlib
 import typing as t
 
@@ -52,6 +53,8 @@ def get_libraries(root: str) -> t.Sequence[str]:
 
 
 def get_extra_compile_args(root: str) -> t.Sequence[str]:
+    VERSION = os.environ["PYICU_VERSION"]
+    ICU_MAX_MAJOR_VERSION = os.environ["ICU_MAX_MAJOR_VERSION"]
     return [
         "-std=c++17",
         # TODO: pass to define_macros instead
