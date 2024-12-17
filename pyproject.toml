@@ -31,7 +31,7 @@ Issues = "https://github.com/tunnelworks/pyicu-binary/issues"
 Source = "https://github.com/tunnelworks/pyicu-binary"
 
 [tool.hatch.version]
-path = "src/pyicu_binary/__about__.py"
+path = "src/icu/__about__.py"
 
 
 [tool.hatch.envs.default]
