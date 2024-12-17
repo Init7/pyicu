@@ -3,10 +3,6 @@ import pathlib
 import typing as t
 
 
-VERSION: t.Final[str] = "2.14"
-ICU_MAX_MAJOR_VERSION: t.Final[int] = 76
-
-
 def _get_build_dir(root: str) -> pathlib.Path:
     return pathlib.Path(root).joinpath(".build")
 
