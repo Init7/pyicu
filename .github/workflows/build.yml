@@ -3,7 +3,9 @@ name: Build
 on: [push, pull_request]
 
 env:
+  PYICU_URL: "https://gitlab.pyicu.org/main/pyicu.git"
   PYICU_VERSION: "2.14"
+  ICU_MAX_MAJOR_VERSION: 76
   _ICU_URL: https://github.com/unicode-org/icu/releases/download/release-76-1/icu4c-76_1-src.tgz
 
 jobs:
