@@ -4,8 +4,9 @@ set -euo pipefail
 
 _HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "dir: ${_HERE}"
-echo "pwd: $(pwd)"
+# TODO: make more reliable perhaps
+# NOTE: export build dir, used downstream
+export _BUILD_DIR="$(pwd)/.build"
 
 echo "package config: $(which pkg-config)"
 env
