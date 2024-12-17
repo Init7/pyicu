@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-_ICU_DIR="/tmp/build/icu"
+_TMP_DIR="$(dirname "${_BUILD_DIR}")/.libicu.tmp"
 _ICU_SRC="https://github.com/unicode-org/icu/releases/download/release-76-1/icu4c-76_1-src.tgz"
 
 
@@ -19,8 +19,8 @@ if command -v make 2>&1 >/dev/null; then
 fi
 
 
-mkdir -p $_ICU_DIR
-cd $_ICU_DIR
+mkdir -p $_TMP_DIR
+cd $_TMP_DIR
 
 wget -q -O icu.tgz $_ICU_SRC
 gunzip -d < icu.tgz | tar xf -
