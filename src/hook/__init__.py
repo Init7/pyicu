@@ -30,7 +30,7 @@ def get_library_dirs(root: str) -> t.Sequence[str]:
     return [str(path)]
 
 
-def get_libraries(_: str) -> t.Sequence[str]:
+def get_libraries(root: str) -> t.Sequence[str]:
     # NOTE: manylinux
     return [
         "icudata",
@@ -45,7 +45,7 @@ def get_libraries(_: str) -> t.Sequence[str]:
     ]
 
 
-def get_extra_compile_args(_: str) -> t.Sequence[str]:
+def get_extra_compile_args(root: str) -> t.Sequence[str]:
     VERSION = os.environ["PYICU_VERSION"]
     ICU_MAX_MAJOR_VERSION = os.environ["ICU_MAX_MAJOR_VERSION"]
     return [
@@ -54,7 +54,3 @@ def get_extra_compile_args(_: str) -> t.Sequence[str]:
         f'-DPYICU_VER="{VERSION}"',
         f'-DPYICU_ICU_MAX_VER="{ICU_MAX_MAJOR_VERSION}"',
     ]
-
-
-def get_extra_link_args(_: str) -> t.Sequence[str]:
-    return []
