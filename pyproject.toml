@@ -63,10 +63,6 @@ skip = ""
 archs = ["auto"]
 
 
-[tool.coverage.paths]
-pyicu_binary = ["src/pyicu_binary", "*/pyicu-binary/src/pyicu_binary"]
-tests = ["tests", "*/pyicu-binary/tests"]
-
 [tool.cibuildwheel.linux]
 environment = {}
 environment-pass = ["PYICU_URL", "PYICU_VERSION", "ICU_MAX_MAJOR_VERSION"]
