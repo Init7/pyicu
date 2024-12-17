@@ -30,6 +30,10 @@ case "$ID" in
         dnf -y install wget
         ;;
 
+    alpine)
+        apk add wget
+        ;;
+
     *)
         echo "$0: unexpected Linux distribution: '$ID'" >&2
         exit 1
