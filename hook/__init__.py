@@ -11,10 +11,6 @@ def _get_build_dir(root: str) -> pathlib.Path:
     return pathlib.Path(root).joinpath(".build")
 
 
-def _get_lib_path(root: str) -> pathlib.Path:
-    return _get_build_dir(root=root).joinpath("lib")
-
-
 def get_sources(root: str) -> t.Sequence[str]:
     pyicu = pathlib.Path(root).joinpath("pyicu").absolute()
     return list(map(str, pyicu.glob("**/*.cpp")))
