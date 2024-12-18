@@ -16,7 +16,7 @@ env:
 
 jobs:
   linux:
-    name: Build wheels on Linux (${{ matrix.platform }}-${{ matrix.arch }})
+    name: Linux wheels (${{ matrix.cpy }}-${{ matrix.platform }}_${{ matrix.arch }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
