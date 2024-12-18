@@ -59,6 +59,17 @@ jobs:
           hatch run pyicu:src
           hatch run pyicu:tests
 
+      - name: Cache libicu
+        id: cache-libicu
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.build
+          key: libicu-${{ matrix.platform }}-${{ matrix.arch }}-${{ env.LIBICU_VERSION }}
+
+      - name: Configure build directory
+        if: steps.cache-libicu.outputs.cache-hit != 'true'
+        run: hatch run dirs:setup
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         with:
