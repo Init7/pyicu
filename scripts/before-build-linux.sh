@@ -37,4 +37,8 @@ case "${ID}" in
 esac
 
 
-${_HERE}/install-libicu.sh Linux
+if [ ! -d "${_BUILD_DIR}/lib" ]; then
+  ${_HERE}/install-libicu.sh Linux
+fi
+
+${_HERE}/configure-libicu.sh Linux
