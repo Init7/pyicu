@@ -35,7 +35,7 @@ jobs:
           - "cp313"
         platform:
           - "manylinux"
-        #   - musllinux
+          - "musllinux"
 
     env:
       _BUILD_DIR: "/host/tmp/.build"
