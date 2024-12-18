@@ -3,7 +3,7 @@ import pathlib
 import typing as t
 
 
-def _get_build_dir(root: str) -> pathlib.Path:
+def _get_build_dir() -> pathlib.Path:
     return pathlib.Path(os.environ["_BUILD_DIR"])
 
 
@@ -13,7 +13,7 @@ def get_sources(root: str) -> t.Sequence[str]:
 
 
 def get_include_dirs(root: str) -> t.Sequence[str]:
-    path = _get_build_dir(root).joinpath("include").absolute()
+    path = _get_build_dir().joinpath("include").absolute()
 
     if not path.exists():
         raise FileNotFoundError(f"{path} does not exist")
@@ -22,7 +22,7 @@ def get_include_dirs(root: str) -> t.Sequence[str]:
 
 
 def get_library_dirs(root: str) -> t.Sequence[str]:
-    path = _get_build_dir(root).joinpath("lib").absolute()
+    path = _get_build_dir().joinpath("lib").absolute()
 
     if not path.exists():
         raise FileNotFoundError(f"{path} does not exist")
