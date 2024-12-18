@@ -32,6 +32,9 @@ jobs:
           - "manylinux"
         #   - musllinux
 
+    env:
+      _BUILD_DIR: "/host/tmp/.build"
+
     steps:
       - uses: actions/checkout@v4
 
@@ -63,7 +66,7 @@ jobs:
         id: cache-libicu
         uses: actions/cache@v4
         with:
-          path: ${{ github.workspace }}/.build
+          path: ${{ env._BUILD_DIR }}
           key: libicu-${{ matrix.platform }}-${{ matrix.arch }}-${{ env.LIBICU_VERSION }}
 
       - name: Configure build directory
