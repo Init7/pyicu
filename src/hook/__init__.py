@@ -4,7 +4,7 @@ import typing as t
 
 
 def _get_build_dir(root: str) -> pathlib.Path:
-    return pathlib.Path(root).joinpath(".build")
+    return pathlib.Path(os.environ["_BUILD_DIR"])
 
 
 def get_sources(root: str) -> t.Sequence[str]:
