@@ -34,21 +34,3 @@ chmod +x runConfigureICU configure install-sh
 ./runConfigureICU ${_PLATFORM} --prefix=${_BUILD_DIR}
 ${_MAKE}
 ${_MAKE} install
-
-
-
-case "${_PLATFORM}" in
-  "Linux"*)
-    # TODO: fix?
-    echo "${_BUILD_DIR}/lib" >> /etc/ld.so.conf
-    ldconfig
-    ;;
-
-  "macOS"*)
-    # TODO: doesn't do anything, but worth adding wherever needed
-    export DYLD_LIBRARY_PATH="${_BUILD_DIR}/lib"
-    ;;
-
-  *)
-    ;;
-esac
