@@ -69,10 +69,6 @@ jobs:
           path: ${{ env._BUILD_DIR }}
           key: libicu-${{ matrix.platform }}-${{ matrix.arch }}-${{ env.LIBICU_VERSION }}
 
-      - name: Configure build directory
-        if: steps.cache-libicu.outputs.cache-hit != 'true'
-        run: hatch run dirs:setup
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         with:
