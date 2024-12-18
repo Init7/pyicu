@@ -77,7 +77,7 @@ test-requires = "pytest six"
 
 [tool.cibuildwheel.linux]
 environment = {}
-environment-pass = ["PYICU_VERSION", "ICU_MAX_MAJOR_VERSION"]
+environment-pass = ["_BUILD_DIR", "PYICU_VERSION", "ICU_MAX_MAJOR_VERSION"]
 before-build = "scripts/before-build-linux.sh"
 manylinux-x86_64-image = "manylinux_2_28"
 # repair-wheel-command = "auditwheel repair -w {dest_dir} {wheel}"

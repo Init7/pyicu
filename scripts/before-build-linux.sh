@@ -4,10 +4,6 @@ set -euo pipefail
 
 _HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# TODO: make more reliable perhaps
-# NOTE: export build dir, used downstream
-export _BUILD_DIR="$(pwd)/.build"
-
 
 # NOTE: add `ID` to environment
 source /etc/os-release
