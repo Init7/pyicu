@@ -2,7 +2,9 @@
 
 set -euo pipefail
 
-_TMP_DIR="$(dirname "${_BUILD_DIR}")/.libicu.tmp"
+_HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+_TMP_DIR="${_HERE}/.libicu.tmp"
 _ICU_SRC="https://github.com/unicode-org/icu/releases/download/release-76-1/icu4c-76_1-src.tgz"
 
 
