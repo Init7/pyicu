@@ -25,7 +25,7 @@ jobs:
           - "x86_64"
           - "aarch64"
           - "i686"
-          # - "ppc64le"
+          - "ppc64le"
         cpy:
           # - "cp38"
           # - "cp39"
