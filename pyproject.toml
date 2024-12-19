@@ -71,7 +71,7 @@ check = "mypy --install-types --non-interactive {args:src/icu src/hook}"
 [tool.cibuildwheel]
 build = "*"
 skip = ""
-archs = ["auto", "aarch64"]
+archs = ["auto", "aarch64", "ppc64le"]
 test-command = "python -m pytest {project}/tests"
 test-requires = "pytest six"
 
