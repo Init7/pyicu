@@ -80,7 +80,8 @@ environment = {}
 environment-pass = ["_BUILD_DIR", "PYICU_VERSION", "ICU_MAX_MAJOR_VERSION"]
 before-build = "scripts/before-build-linux.sh"
 manylinux-x86_64-image = "manylinux_2_28"
-manylinux-i686-image = "manylinux_2_28"
+# NOTE: manylinux_2_28 is not supported for i686
+manylinux-i686-image = "manylinux_2_24"
 manylinux-aarch64-image = "manylinux_2_28"
 manylinux-ppc64le-image = "manylinux_2_28"
 musllinux-x86_64-image = "musllinux_1_2"
