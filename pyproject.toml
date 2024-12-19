@@ -58,7 +58,7 @@ extra-dependencies = ["cibuildwheel"]
 
 [tool.hatch.envs.compile.scripts]
 libicu = "{root:real}/scripts/install-libicu.sh {args:macOS/gcc}"
-build = "cibuildwheel {args:--platform linux {root:real}}"
+build = "cibuildwheel {args:--debug-traceback --platform linux {root:real}}"
 
 
 [tool.hatch.envs.types]
