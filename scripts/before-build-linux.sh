@@ -45,7 +45,7 @@ fi
 
 # NOTE: configure library search paths
 case "${ID}" in
-  almalinux)
+  almalinux|centos)
     echo "${_BUILD_DIR}/lib" >> /etc/ld.so.conf
     ldconfig
     ;;
