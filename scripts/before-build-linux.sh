@@ -27,7 +27,8 @@ case "${ID}" in
     ;;
 
   alpine)
-    apk add wget
+    apk upgrade
+    apk add --no-cache wget
     ;;
 
   *)
@@ -41,4 +42,20 @@ if [ ! -d "${_BUILD_DIR}/lib" ]; then
   ${_HERE}/install-libicu.sh Linux
 fi
 
-${_HERE}/configure-libicu.sh Linux
+
+# NOTE: configure library search paths
+case "${ID}" in
+  almalinux)
+    echo "${_BUILD_DIR}/lib" >> /etc/ld.so.conf
+    ldconfig
+    ;;
+
+  alpine)
+    _DEFAULT_LIBS="/lib:/usr/local/lib:/usr/lib"
+    echo "${_BUILD_DIR}/lib:${_DEFAULT_LIBS}" >> /etc/ld-musl-$(uname -m).path
+    ldconfig "${_BUILD_DIR}/lib:${_DEFAULT_LIBS}"
+    ;;
+
+  *)
+    ;;
+esac
