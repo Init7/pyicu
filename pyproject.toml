@@ -80,8 +80,10 @@ environment = {}
 environment-pass = ["_BUILD_DIR", "PYICU_VERSION", "ICU_MAX_MAJOR_VERSION"]
 before-build = "scripts/before-build-linux.sh"
 manylinux-x86_64-image = "manylinux_2_28"
+manylinux-i686-image = "manylinux_2_28"
 manylinux-aarch64-image = "manylinux_2_28"
 musllinux-x86_64-image = "musllinux_1_2"
+musllinux-i686-image = "musllinux_1_2"
 musllinux-aarch64-image = "musllinux_1_2"
 # repair-wheel-command = "auditwheel repair -w {dest_dir} {wheel}"
 
