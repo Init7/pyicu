@@ -143,9 +143,6 @@ jobs:
         cpy:
           - "cp310"
 
-    env:
-      _BUILD_DIR: "/opt/homebrew/opt/icu4c@${{ env.LIBICU_VERSION }}"
-
     steps:
       - uses: actions/checkout@v4
 
@@ -181,6 +178,7 @@ jobs:
           CIBW_ENVIRONMENT: >-
             MACOSX_DEPLOYMENT_TARGET=14.0
             PKG_CONFIG_PATH="/opt/homebrew/opt/icu4c@${{ env.LIBICU_VERSION }}/lib/pkgconfig"
+            _BUILD_DIR="/opt/homebrew/opt/icu4c@${{ env.LIBICU_VERSION }}"
 
       - uses: actions/upload-artifact@v4
         with:
