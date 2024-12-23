@@ -102,7 +102,7 @@ packages = ["src/icu"]
 dependencies = ["hatch-buildext >=0.0.4"]
 
 [tool.hatch.build.targets.wheel.hooks.buildext.extensions]
-"icu._icu_" = "src.hook"
+"icu._icu_" = "src.resolvers.libicu"
 
 
 [tool.ruff]
