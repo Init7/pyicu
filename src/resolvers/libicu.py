@@ -63,6 +63,6 @@ def get_macros(root: str, /) -> t.Sequence[Macro]:
         ),
         Macro(
             name="PYICU_ICU_MAX_VER",
-            value=_quote(os.environ["ICU_MAX_MAJOR_VERSION"]),
+            value=_quote(os.environ["LIBICU_VERSION"]),
         ),
     ]
