@@ -98,6 +98,9 @@ jobs:
     runs-on: macos-${{ matrix.macos }}
     strategy:
       matrix:
+        arch:
+          - "x86_64"
+          - "arm64"
         cpy:
           - "cp310"
         include:
