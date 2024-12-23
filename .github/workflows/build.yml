@@ -136,3 +136,53 @@ jobs:
         with:
           name: macos-13-${{matrix.cpy}}-macosx_${{matrix.arch}}
           path: ./wheelhouse/*.whl
+
+  macos-arm:
+    if: true
+    name: Build wheels on macOS (arm64)
+    # NOTE: macos-14 is apple silicon
+    runs-on: macos-14
+    strategy:
+      matrix:
+        arch:
+          - "arm64"
+        cpy:
+          - "cp310"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Hatch
+        run: pip install --upgrade hatch
+
+      - name: Cache pyicu
+        id: cache-pyicu
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/pyicu
+          key: ${{ runner.os }}-pyicu-${{ env.PYICU_VERSION }}
+
+      - name: Fetch pyicu source
+        if: steps.cache-pyicu.outputs.cache-hit != 'true'
+        run: hatch run pyicu:clone
+
+      - name: Install build dependencies
+        run: |
+          brew update
+          brew install pkgconf icu4c@${{ env.LIBICU_VERSION }}
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.22.0
+        with:
+          package-dir: pyicu
+        env:
+          CIBW_BUILD: ${{matrix.cpy}}-macosx_${{matrix.arch}}
+          CIBW_ARCHS_MACOS: ${{matrix.arch}}
+          CIBW_ENVIRONMENT: >-
+            MACOSX_DEPLOYMENT_TARGET=14.0
+            PKG_CONFIG_PATH="/opt/homebrew/opt/icu4c@${{ env.LIBICU_VERSION }}/lib/pkgconfig"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos-14-${{matrix.cpy}}-macosx_${{matrix.arch}}
+          path: ./wheelhouse/*.whl
