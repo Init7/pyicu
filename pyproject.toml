@@ -36,7 +36,7 @@ path = "src/icu/__about__.py"
 
 
 [tool.hatch.envs.default]
-dependencies = []
+dependencies = ["hatch_buildext"]
 
 [tool.hatch.envs.default.env-vars]
 _LIBICU_DIR = "{root:real}/.build"
