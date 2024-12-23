@@ -97,7 +97,7 @@ jobs:
 
   macos:
     if: true
-    name: Build wheels on macOS (${{ matrix.arch }})
+    name: macOS wheels (${{ matrix.cpy }}-macosx_${{ matrix.macos }}_${{ matrix.arch }})
     runs-on: macos-${{ matrix.macos }}
     strategy:
       matrix:
