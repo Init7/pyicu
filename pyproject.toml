@@ -71,14 +71,13 @@ check = "mypy --install-types --non-interactive {args:src/icu src/hook}"
 
 [tool.cibuildwheel]
 build = "*"
+environment-pass = ["_BUILD_DIR", "PYICU_VERSION", "ICU_MAX_MAJOR_VERSION"]
 skip = ""
 archs = ["auto", "aarch64", "ppc64le"]
 test-command = "python -m pytest {project}/tests"
 test-requires = "pytest six"
 
 [tool.cibuildwheel.linux]
-environment = {}
-environment-pass = ["_BUILD_DIR", "PYICU_VERSION", "ICU_MAX_MAJOR_VERSION"]
 before-build = "scripts/before-build-linux.sh"
 manylinux-x86_64-image = "manylinux_2_28"
 # NOTE: manylinux_2_28 is not supported for i686
