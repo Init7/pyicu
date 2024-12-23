@@ -143,6 +143,9 @@ jobs:
         cpy:
           - "cp310"
 
+    env:
+      _BUILD_DIR: "/opt/homebrew/opt/icu4c@${{ env.LIBICU_VERSION }}"
+
     steps:
       - uses: actions/checkout@v4
 
