@@ -39,7 +39,7 @@ path = "src/icu/__about__.py"
 dependencies = []
 
 [tool.hatch.envs.default.env-vars]
-_BUILD_DIR = "{root:real}/.build"
+_LIBICU_DIR = "{root:real}/.build"
 PYICU_URL = "https://gitlab.pyicu.org/main/pyicu.git"
 PYICU_VERSION = "2.14"
 ICU_MAX_MAJOR_VERSION = "76"
@@ -71,7 +71,7 @@ check = "mypy --install-types --non-interactive {args:src/icu src/hook}"
 
 [tool.cibuildwheel]
 build = "*"
-environment-pass = ["_BUILD_DIR", "PYICU_VERSION", "ICU_MAX_MAJOR_VERSION"]
+environment-pass = ["_LIBICU_DIR", "PYICU_VERSION", "ICU_MAX_MAJOR_VERSION"]
 skip = ""
 archs = ["auto", "aarch64", "ppc64le"]
 test-command = "python -m pytest {project}/tests"

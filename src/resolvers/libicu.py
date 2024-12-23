@@ -4,8 +4,8 @@ import typing as t
 from hatch_buildext import Macro
 
 
-def _get_build_dir() -> pathlib.Path:
-    return pathlib.Path(os.environ["_BUILD_DIR"])
+def _get_libicu_dir() -> pathlib.Path:
+    return pathlib.Path(os.environ["_LIBICU_DIR"])
 
 
 def _quote(value: str) -> str:
@@ -18,7 +18,7 @@ def get_sources(root: str, /) -> t.Sequence[str]:
 
 
 def get_include_dirs(root: str, /) -> t.Sequence[str]:
-    path = _get_build_dir().joinpath("include").absolute()
+    path = _get_libicu_dir().joinpath("include").absolute()
 
     if not path.exists():
         raise FileNotFoundError(f"{path} does not exist")
@@ -27,7 +27,7 @@ def get_include_dirs(root: str, /) -> t.Sequence[str]:
 
 
 def get_library_dirs(root: str, /) -> t.Sequence[str]:
-    path = _get_build_dir().joinpath("lib").absolute()
+    path = _get_libicu_dir().joinpath("lib").absolute()
 
     if not path.exists():
         raise FileNotFoundError(f"{path} does not exist")

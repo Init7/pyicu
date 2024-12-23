@@ -38,7 +38,7 @@ case "${ID}" in
 esac
 
 
-if [ ! -d "${_BUILD_DIR}/lib" ]; then
+if [ ! -d "${_LIBICU_DIR}/lib" ]; then
   ${_HERE}/install-libicu.sh Linux
 fi
 
@@ -46,14 +46,14 @@ fi
 # NOTE: configure library search paths
 case "${ID}" in
   almalinux|centos)
-    echo "${_BUILD_DIR}/lib" >> /etc/ld.so.conf
+    echo "${_LIBICU_DIR}/lib" >> /etc/ld.so.conf
     ldconfig
     ;;
 
   alpine)
     _DEFAULT_LIBS="/lib:/usr/local/lib:/usr/lib"
-    echo "${_BUILD_DIR}/lib:${_DEFAULT_LIBS}" >> /etc/ld-musl-$(uname -m).path
-    ldconfig "${_BUILD_DIR}/lib:${_DEFAULT_LIBS}"
+    echo "${_LIBICU_DIR}/lib:${_DEFAULT_LIBS}" >> /etc/ld-musl-$(uname -m).path
+    ldconfig "${_LIBICU_DIR}/lib:${_DEFAULT_LIBS}"
     ;;
 
   *)

@@ -31,6 +31,6 @@ cd icu/source
 chmod +x runConfigureICU configure install-sh
 # TODO: probably not necessary?
 # --enable-static
-./runConfigureICU ${_PLATFORM} --prefix=${_BUILD_DIR}
+./runConfigureICU ${_PLATFORM} --prefix=${_LIBICU_DIR}
 ${_MAKE}
 ${_MAKE} install
