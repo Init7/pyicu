@@ -92,7 +92,7 @@ jobs:
           name: linux-${{ matrix.cpy }}-${{ matrix.platform }}_${{ matrix.arch }}
           path: ./wheelhouse/*.whl
 
-  macos-arm:
+  macos:
     if: true
     name: Build wheels on macOS (${{ matrix.arch }})
     runs-on: macos-${{ matrix.macos }}
