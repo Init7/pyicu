@@ -166,6 +166,11 @@ jobs:
         if: steps.cache-pyicu.outputs.cache-hit != 'true'
         run: hatch run pyicu:clone
 
+      - name: Copy src and tests
+        run: |
+          hatch run pyicu:src
+          hatch run pyicu:tests
+
       - name: Install build dependencies
         run: |
           brew update
