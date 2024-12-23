@@ -5,11 +5,11 @@ build-backend = "hatchling.build"
 [project]
 name = "pyicu-wheels"
 dynamic = ["version"]
-description = ''
+description = 'Wheels for PyICU'
 readme = "README.md"
 requires-python = ">=3.8"
 license = "Apache-2.0"
-keywords = []
+keywords = ["icu", "i18n", "wheel"]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
@@ -21,6 +21,8 @@ classifiers = [
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Software Development :: Localization",
+  "Topic :: Software Development :: Internationalization",
 ]
 dependencies = []
 
