@@ -96,10 +96,10 @@ jobs:
           path: ./wheelhouse/*.whl
 
   macos:
-    if: true
     name: macOS wheels (${{ matrix.cpy }}-macosx_${{ matrix.macos }}_${{ matrix.arch }})
     runs-on: macos-${{ matrix.macos }}
     strategy:
+      fail-fast: false
       matrix:
         arch:
           - "x86_64"
