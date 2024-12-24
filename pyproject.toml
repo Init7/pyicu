@@ -68,7 +68,7 @@ build = "cibuildwheel {args:--debug-traceback --platform linux {root:real}}"
 extra-dependencies = ["mypy>=1.0.0"]
 
 [tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/icu src/hook}"
+check = "mypy --install-types --non-interactive {args:src/icu src/resolvers}"
 
 
 [tool.cibuildwheel]
