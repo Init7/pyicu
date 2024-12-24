@@ -93,9 +93,6 @@ musllinux-ppc64le-image = "musllinux_1_2"
 # repair-wheel-command = "auditwheel repair -w {dest_dir} {wheel}"
 
 
-[tool.hatch.build.targets.sdist]
-exclude = [".github", "tests"]
-
 [tool.hatch.build.targets.wheel]
 packages = ["src/icu"]
 
