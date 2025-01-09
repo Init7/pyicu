@@ -28,9 +28,9 @@ dependencies = []
 
 
 [project.urls]
-Documentation = "https://github.com/xoudini/pyicu#readme"
-Issues = "https://github.com/xoudini/pyicu/issues"
-Source = "https://github.com/xoudini/pyicu"
+Documentation = "https://github.com/Init7/pyicu#readme"
+Issues = "https://github.com/Init7/pyicu/issues"
+Source = "https://github.com/Init7/pyicu/pyicu"
 
 
 [tool.hatch.version]
