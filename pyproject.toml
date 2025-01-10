@@ -30,7 +30,7 @@ dependencies = []
 [project.urls]
 Documentation = "https://github.com/Init7/pyicu#readme"
 Issues = "https://github.com/Init7/pyicu/issues"
-Source = "https://github.com/Init7/pyicu/pyicu"
+Source = "https://github.com/Init7/pyicu"
 
 
 [tool.hatch.version]
