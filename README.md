@@ -8,6 +8,7 @@
 ## Table of Contents
 
 - [Installation](#installation)
+- [Documentation](#documentation)
 - [License](#license)
 
 ## Installation
@@ -15,6 +16,10 @@
 ```console
 pip install pyicu-wheels
 ```
+
+## Documentation
+
+See the [PyICU repository](https://gitlab.pyicu.org/main/pyicu).
 
 ## License
 
