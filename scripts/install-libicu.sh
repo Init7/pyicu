@@ -5,7 +5,7 @@ set -euo pipefail
 _HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 _TMP_DIR="${_HERE}/.libicu.tmp"
-_ICU_SRC="https://github.com/unicode-org/icu/releases/download/release-76-1/icu4c-76_1-src.tgz"
+_ICU_SRC="https://github.com/unicode-org/icu/releases/download/release-77-1/icu4c-77_1-src.tgz"
 
 
 # NOTE: see the docs for `runConfigureICU` for the options
