@@ -81,9 +81,8 @@ jobs:
         uses: docker/setup-qemu-action@v3
         with:
           platforms: all
-          # Note: 6.2.0 is buggy: make sure to avoid it.
-          # See https://github.com/pypa/cibuildwheel/issues/1250
-          image: tonistiigi/binfmt:qemu-v7.0.0
+          # See https://github.com/pypa/cibuildwheel/discussions/2256
+          image: tonistiigi/binfmt:qemu-v8.1.5
 
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.22.0
