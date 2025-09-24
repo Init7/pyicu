@@ -36,6 +36,7 @@ jobs:
           - "cp311"
           - "cp312"
           - "cp313"
+          - "cp314"
         platform:
           - "manylinux"
           - "musllinux"
@@ -110,6 +111,7 @@ jobs:
           - "cp311"
           - "cp312"
           - "cp313"
+          - "cp314"
         include:
           - arch: "x86_64"
             macos: 13
