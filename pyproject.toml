@@ -75,7 +75,7 @@ check = "mypy --install-types --non-interactive {args:src/icu src/resolvers}"
 build = "*"
 environment-pass = ["_LIBICU_DIR", "PYICU_VERSION", "LIBICU_VERSION"]
 skip = ""
-archs = ["auto", "aarch64", "ppc64le"]
+archs = ["auto", "aarch64", "ppc64le", "i686"]
 test-command = "python -m pytest {project}/tests"
 test-requires = "pytest six"
 
