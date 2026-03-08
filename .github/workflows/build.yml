@@ -97,7 +97,7 @@ jobs:
 
   macos:
     name: macOS wheels (${{ matrix.cpy }}-macosx_${{ matrix.macos }}_${{ matrix.arch }})
-    runs-on: macos-${{ matrix.macos }}
+    runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
       matrix:
@@ -114,11 +114,13 @@ jobs:
           - "cp314"
         include:
           - arch: "x86_64"
-            macos: 13
+            macos: 15
             brew: "/usr/local/opt"
+            runner: "macos-15-intel"
           - arch: "arm64"
-            macos: 14
+            macos: 15
             brew: "/opt/homebrew/opt"
+            runner: "macos-15"
 
     steps:
       - uses: actions/checkout@v4
