@@ -21,6 +21,9 @@ classifiers = [
   "Programming Language :: Python :: Free Threading",
   "Programming Language :: Python :: Free Threading :: 2 - Beta",
   "Programming Language :: Python :: Implementation :: CPython",
+  "Operating System :: MacOS",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
   "Topic :: Software Development :: Localization",
   "Topic :: Software Development :: Internationalization",
 ]
