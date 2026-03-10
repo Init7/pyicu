@@ -48,7 +48,7 @@ def get_libraries(root: str, /) -> t.Sequence[str]:
 
 def get_extra_compile_args(root: str, /) -> t.Sequence[str]:
     if _IS_WINDOWS:
-        return ["/std:c++17", "/EHsc"]
+        return ["/std:c++17", "/EHsc", "/Zc:wchar_t"]
 
     return ["-std=c++17"]
 
