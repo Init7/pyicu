@@ -97,7 +97,7 @@ musllinux-ppc64le-image = "musllinux_1_2"
 packages = ["src/icu"]
 
 [tool.hatch.build.targets.wheel.hooks.buildext]
-dependencies = ["hatch-buildext >=0.2.0"]
+dependencies = ["hatch-buildext >=0.3.1"]
 
 [tool.hatch.build.targets.wheel.hooks.buildext.extensions]
 "icu._icu_" = "src.resolvers.libicu"
