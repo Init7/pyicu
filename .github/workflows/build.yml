@@ -19,7 +19,6 @@ env:
 
 jobs:
   linux:
-    if: false
     name: Linux wheels (${{ matrix.cpy }}-${{ matrix.platform }}_${{ matrix.arch }})
     runs-on: ubuntu-latest
     strategy:
@@ -96,7 +95,6 @@ jobs:
           path: ./wheelhouse/*.whl
 
   macos:
-    if: false
     name: macOS wheels (${{ matrix.cpy }}-macosx_${{ matrix.macos }}_${{ matrix.arch }})
     runs-on: ${{ matrix.runner }}
     strategy:
@@ -226,17 +224,6 @@ jobs:
         run: |
           hatch run pyicu:src
           hatch run pyicu:tests
-
-      - name: Patch pyicu for MSVC
-        shell: python
-        run: |
-          import pathlib
-          f = pathlib.Path("pyicu/arg.h")
-          t = f.read_text()
-          if "#ifndef _MSC_VER" not in t:
-              t = t.replace("#define _IS_POD(T)", "#ifndef _MSC_VER\n#define _IS_POD(T)")
-              t = t.replace("#undef _IS_POD", "#undef _IS_POD\n#endif")
-              f.write_text(t)
 
       - name: Cache libicu
         id: cache-libicu

@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling", "hatch-buildext >=0.3.1"]
+requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
@@ -98,7 +98,6 @@ archs = ["AMD64", "ARM64", "x86"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/icu"]
-artifacts = ["src/icu/*.dll"]
 
 [tool.hatch.build.targets.wheel.hooks.buildext]
 dependencies = ["hatch-buildext >=0.3.1"]
