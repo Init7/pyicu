@@ -1,7 +1,11 @@
 import os
 import pathlib
+import sys
 import typing as t
 from hatch_buildext import Macro
+
+
+_IS_WINDOWS = sys.platform == "win32"
 
 
 def _get_libicu_dir() -> pathlib.Path:
@@ -36,22 +40,16 @@ def get_library_dirs(root: str, /) -> t.Sequence[str]:
 
 
 def get_libraries(root: str, /) -> t.Sequence[str]:
-    # NOTE: manylinux
-    return [
-        "icudata",
-        "icui18n",
-        "icuuc",
-    ]
-    # TODO: fix for other platforms?
-    return [
-        "libicudata",
-        "libicui18n",
-        "libicuuc",
-    ]
+    if _IS_WINDOWS:
+        return ["icudt", "icuin", "icuuc"]
+
+    return ["icudata", "icui18n", "icuuc"]
 
 
 def get_extra_compile_args(root: str, /) -> t.Sequence[str]:
-    # NOTE: required by pyicu
+    if _IS_WINDOWS:
+        return ["/std:c++17", "/EHsc"]
+
     return ["-std=c++17"]
 
 

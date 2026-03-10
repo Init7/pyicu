@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-buildext >=0.3.1"]
 build-backend = "hatchling.build"
 
 [project]
@@ -52,8 +52,8 @@ skip-install = true
 
 [tool.hatch.envs.pyicu.scripts]
 clone = "git clone --branch=v{env:PYICU_VERSION} --depth=1 {env:PYICU_URL}"
-src = "cp {root:real}/pyicu/py/icu/* {root:real}/src/icu/"
-tests = "cp {root:real}/pyicu/test/* {root:real}/tests/"
+src = "python scripts/copy-files.py {root:real}/pyicu/py/icu {root:real}/src/icu"
+tests = "python scripts/copy-files.py {root:real}/pyicu/test {root:real}/tests"
 
 
 [tool.hatch.envs.compile]
@@ -92,9 +92,13 @@ musllinux-aarch64-image = "musllinux_1_2"
 musllinux-ppc64le-image = "musllinux_1_2"
 # repair-wheel-command = "auditwheel repair -w {dest_dir} {wheel}"
 
+[tool.cibuildwheel.windows]
+archs = ["AMD64", "ARM64", "x86"]
+
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/icu"]
+artifacts = ["src/icu/*.dll"]
 
 [tool.hatch.build.targets.wheel.hooks.buildext]
 dependencies = ["hatch-buildext >=0.3.1"]

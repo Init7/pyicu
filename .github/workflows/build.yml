@@ -19,6 +19,7 @@ env:
 
 jobs:
   linux:
+    if: false
     name: Linux wheels (${{ matrix.cpy }}-${{ matrix.platform }}_${{ matrix.arch }})
     runs-on: ubuntu-latest
     strategy:
@@ -95,6 +96,7 @@ jobs:
           path: ./wheelhouse/*.whl
 
   macos:
+    if: false
     name: macOS wheels (${{ matrix.cpy }}-macosx_${{ matrix.macos }}_${{ matrix.arch }})
     runs-on: ${{ matrix.runner }}
     strategy:
@@ -161,6 +163,110 @@ jobs:
           name: cibw-macos-${{ matrix.macos }}-${{ matrix.cpy }}-macosx_${{ matrix.arch }}
           path: ./wheelhouse/*.whl
 
+  windows:
+    name: Windows wheels (${{ matrix.cpy }}-${{ matrix.cibw_build_suffix }})
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        arch:
+          - "AMD64"
+          - "ARM64"
+          - "x86"
+        cpy:
+          - "cp310"
+          - "cp311"
+          - "cp312"
+          - "cp313"
+          - "cp314"
+          - "cp314t"
+        include:
+          - arch: "AMD64"
+            runner: "windows-latest"
+            cibw_build_suffix: "win_amd64"
+            icu_plat: "Win64-MSVC2022"
+            icu_lib_suffix: "64"
+          - arch: "ARM64"
+            runner: "windows-11-arm"
+            cibw_build_suffix: "win_arm64"
+            icu_plat: "WinARM64-MSVC2022"
+            icu_lib_suffix: "ARM64"
+          - arch: "x86"
+            runner: "windows-latest"
+            cibw_build_suffix: "win32"
+            icu_plat: "Win32-MSVC2022"
+            icu_lib_suffix: ""
+
+    env:
+      _LIBICU_DIR: "C:\\icu"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Hatch
+        run: pip install --upgrade hatch
+
+      - name: Cache pyicu
+        id: cache-pyicu
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/pyicu
+          key: ${{ runner.os }}-pyicu-${{ env.PYICU_VERSION }}
+
+      - name: Fetch pyicu source
+        if: steps.cache-pyicu.outputs.cache-hit != 'true'
+        run: hatch run pyicu:clone
+
+      - name: Copy src and tests
+        run: |
+          hatch run pyicu:src
+          hatch run pyicu:tests
+
+      - name: Patch pyicu for MSVC
+        shell: python
+        run: |
+          import pathlib
+          f = pathlib.Path("pyicu/arg.h")
+          t = f.read_text()
+          if "#ifndef _MSC_VER" not in t:
+              t = t.replace("#define _IS_POD(T)", "#ifndef _MSC_VER\n#define _IS_POD(T)")
+              t = t.replace("#undef _IS_POD", "#undef _IS_POD\n#endif")
+              f.write_text(t)
+
+      - name: Cache libicu
+        id: cache-libicu
+        uses: actions/cache@v4
+        with:
+          path: C:\icu
+          key: libicu-windows-${{ matrix.arch }}-${{ env.LIBICU_VERSION }}
+
+      - name: Install libicu
+        if: steps.cache-libicu.outputs.cache-hit != 'true'
+        run: powershell -File scripts/install-libicu.ps1
+        env:
+          ICU_PLAT: ${{ matrix.icu_plat }}
+          ICU_LIB_SUFFIX: ${{ matrix.icu_lib_suffix }}
+
+      - name: Copy ICU DLLs to package
+        run: Copy-Item -Path "$env:_LIBICU_DIR\bin\icu*.dll" -Destination "src\icu\" -Force
+        shell: pwsh
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v3.2.0
+        env:
+          CIBW_BUILD: ${{ matrix.cpy }}-${{ matrix.cibw_build_suffix }}
+          CIBW_ARCHS_WINDOWS: ${{ matrix.arch }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cibw-windows-${{ matrix.cpy }}-${{ matrix.cibw_build_suffix }}
+          path: ./wheelhouse/*.whl
+
   publish:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     name: Publish wheels
@@ -168,6 +274,7 @@ jobs:
     needs:
       - linux
       - macos
+      - windows
     environment:
       name: release
       url: https://pypi.org/project/pyicu-wheels
