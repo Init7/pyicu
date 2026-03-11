@@ -14,8 +14,8 @@ permissions:
   contents: read
 
 env:
-  PYICU_VERSION: "2.15.2"
-  LIBICU_VERSION: "77"
+  PYICU_VERSION: "2.16"
+  LIBICU_VERSION: "78"
 
 jobs:
   linux:
@@ -224,18 +224,6 @@ jobs:
         run: |
           hatch run pyicu:src
           hatch run pyicu:tests
-
-      # NOTE: only required for v2.15.2
-      - name: Patch pyicu for MSVC
-        shell: python
-        run: |
-          import pathlib
-          f = pathlib.Path("pyicu/arg.h")
-          t = f.read_text()
-          if "#ifndef _MSC_VER" not in t:
-              t = t.replace("#define _IS_POD(T)", "#ifndef _MSC_VER\n#define _IS_POD(T)")
-              t = t.replace("#undef _IS_POD", "#undef _IS_POD\n#endif")
-              f.write_text(t)
 
       - name: Cache libicu
         id: cache-libicu

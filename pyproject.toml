@@ -46,8 +46,8 @@ dependencies = ["hatch_buildext"]
 [tool.hatch.envs.default.env-vars]
 _LIBICU_DIR = "{root:real}/.build"
 PYICU_URL = "https://gitlab.pyicu.org/main/pyicu.git"
-PYICU_VERSION = "2.15.2"
-LIBICU_VERSION = "77"
+PYICU_VERSION = "2.16"
+LIBICU_VERSION = "78"
 
 
 [tool.hatch.envs.pyicu]
