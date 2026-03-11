@@ -2,7 +2,7 @@ $ErrorActionPreference = "Stop"
 
 $ICU_PLAT = $env:ICU_PLAT
 $ICU_LIB_SUFFIX = $env:ICU_LIB_SUFFIX
-$ICU_URL = "https://github.com/unicode-org/icu/releases/download/release-77-1/icu4c-77_1-${ICU_PLAT}.zip"
+$ICU_URL = "https://github.com/unicode-org/icu/releases/download/release-78.1/icu4c-78.1-${ICU_PLAT}.zip"
 $TMP_DIR = Join-Path $env:TEMP "icu-download"
 $ICU_ZIP = Join-Path $TMP_DIR "icu.zip"
 

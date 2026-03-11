@@ -15,7 +15,7 @@ permissions:
 
 env:
   PYICU_VERSION: "2.16"
-  LIBICU_VERSION: "77"
+  LIBICU_VERSION: "78"
 
 jobs:
   linux:
